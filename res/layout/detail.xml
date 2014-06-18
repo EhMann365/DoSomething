@@ -62,4 +62,9 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/etComment"/>
+    <Button
+            android:layout_width="111dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/btnSave"/>
 </LinearLayout>
