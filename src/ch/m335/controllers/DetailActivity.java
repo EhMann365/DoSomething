@@ -1,16 +1,14 @@
-package com.example.DoSomething;
+package ch.m335.controllers;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 /**
- * Created by Brian on 17.06.2014.
+ * Created by Admin on 18.06.2014.
  */
-public class MainActivity extends Activity {
-
+public class DetailActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail);
     }
 }
