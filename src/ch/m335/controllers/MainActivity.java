@@ -29,13 +29,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail);
-
-        Intent intent = new Intent(this, DetailActivity.class);
-        startActivity(intent);
         setContentView(R.layout.main);
 
+        // Load items into the listview
         loadList();
+
+        // Set listener for navigating to the detail view after clicking an item
         ((ListView) findViewById(R.id.lvHomeworkItems)).setOnItemClickListener(this);
     }
 
@@ -46,6 +45,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, homeworkItems.get(position).toString(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("id", Integer.toString(homeworkItems.get(position).getId()));
+        startActivity(intent);
     }
 }

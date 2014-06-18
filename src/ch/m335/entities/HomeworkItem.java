@@ -30,11 +30,11 @@ public class HomeworkItem {
         this.comment = "";
     }
 
-    public HomeworkItem(String title, String subject, Date dueDate, Object pichture, String comment) {
+    public HomeworkItem(String title, String subject, Date dueDate, Object picture, String comment) {
         this.title = title;
         this.subject = subject;
         this.dueDate = dueDate;
-        this.picture = pichture;
+        this.picture = picture;
         this.comment = comment;
     }
 
