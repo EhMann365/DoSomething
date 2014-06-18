@@ -19,7 +19,9 @@ public class DetailActivity extends Activity {
     private EditText etPicture;
     private Button btnPicture;
     private EditText etComment;
+    private Button btnSave;
     private View.OnClickListener oclPicture;
+    private View.OnClickListener oclSave;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class DetailActivity extends Activity {
         etPicture = (EditText) findViewById(R.id.etPicture);
         btnPicture = (Button) findViewById(R.id.btnPicture);
         etComment = (EditText) findViewById(R.id.etComment);
+        btnSave = (Button) findViewById(R.id.btnSave);
 
         oclPicture = new View.OnClickListener() {
             public void onClick(View v) {
@@ -43,5 +46,12 @@ public class DetailActivity extends Activity {
             }
         };
         btnPicture.setOnClickListener(oclPicture);
+
+        oclPicture = new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        };
+        btnSave.setOnClickListener(oclSave);
     }
 }
