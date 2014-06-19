@@ -44,7 +44,7 @@ public class HomeworkDao extends SQLiteOpenHelper {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = sdf.format(homeworkItem.getDueDate());
         values.put("duedate", dateString);
-        values.put("picture", homeworkItem.getPicture().toString());
+        values.put("picture", homeworkItem.getPicture());
         values.put("comment", homeworkItem.getComment());
 
         db.insert("homework", null, values);
@@ -59,7 +59,7 @@ public class HomeworkDao extends SQLiteOpenHelper {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = sdf.format(homeworkItem.getDueDate());
         values.put("duedate", dateString);
-        values.put("picture", homeworkItem.getPicture().toString());
+        values.put("picture", homeworkItem.getPicture());
         values.put("comment", homeworkItem.getComment());
 
         db.update("homework", values, "id=?", new String[] {String.valueOf(homeworkItem.getId())});

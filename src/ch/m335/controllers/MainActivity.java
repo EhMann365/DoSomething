@@ -25,7 +25,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private HomeworkItemArrayAdapter<HomeworkItem> homeworkItemArrayAdapter;
 
     public MainActivity() {
-        homeworkDao = new HomeworkDao();
+        homeworkDao = new HomeworkDao(this);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void loadList() {
-        homeworkItems = homeworkDao.getHomeworkItems();
+        homeworkItems = (ArrayList<HomeworkItem>) homeworkDao.selectAllHomeworks();
         homeworkItemArrayAdapter = new HomeworkItemArrayAdapter<>(this, homeworkItems);
         ((ListView)findViewById(R.id.lvHomeworkItems)).setAdapter(homeworkItemArrayAdapter);
     }
