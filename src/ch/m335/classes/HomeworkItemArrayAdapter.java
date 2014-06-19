@@ -10,6 +10,7 @@ import ch.m335.controllers.R;
 import ch.m335.entities.HomeworkItem;
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,11 +41,15 @@ public class HomeworkItemArrayAdapter<HomeworkItem> extends ArrayAdapter<Homewor
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View rowView = inflater.inflate(R.layout.row, parent, false);
 
-        ((TextView) rowView.findViewById(R.id.tvTitle)).setText(((ch.m335.entities.HomeworkItem) homeworkItems.get(position)).getTitle());
-        ((TextView) rowView.findViewById(R.id.tvSubject)).setText(((ch.m335.entities.HomeworkItem) homeworkItems.get(position)).getSubject());
+        String title = ((ch.m335.entities.HomeworkItem) homeworkItems.get(position)).getTitle();
+        String subject = ((ch.m335.entities.HomeworkItem) homeworkItems.get(position)).getSubject();
+        String formattedDueDate = new SimpleDateFormat("dd.MM.yyyy").format(((ch.m335.entities.HomeworkItem) homeworkItems.get(position)).getDueDate());
+
+        ((TextView) rowView.findViewById(R.id.tvTitle)).setText(title);
+        ((TextView) rowView.findViewById(R.id.tvSubject)).setText(subject);
+        ((TextView) rowView.findViewById(R.id.tvDueDate)).setText(formattedDueDate);
 
         return rowView;
     }
