@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import ch.m335.classes.HomeworkItemArrayAdapter;
 import ch.m335.dao.HomeworkDao;
 import ch.m335.entities.HomeworkItem;
 
@@ -20,7 +21,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private HomeworkDao homeworkDao;
     private ArrayList<HomeworkItem> homeworkItems;
-    private ArrayAdapter<HomeworkItem> homeworkItemArrayAdapter;
+    private HomeworkItemArrayAdapter<HomeworkItem> homeworkItemArrayAdapter;
 
     public MainActivity() {
         homeworkDao = new HomeworkDao();
@@ -40,7 +41,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void loadList() {
         homeworkItems = homeworkDao.getHomeworkItems();
-        homeworkItemArrayAdapter = new ArrayAdapter<HomeworkItem>(this, android.R.layout.simple_list_item_1, homeworkItems);
+        homeworkItemArrayAdapter = new HomeworkItemArrayAdapter<>(this, homeworkItems);
         ((ListView)findViewById(R.id.lvHomeworkItems)).setAdapter(homeworkItemArrayAdapter);
     }
 
