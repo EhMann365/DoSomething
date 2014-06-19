@@ -4,6 +4,7 @@ import ch.m335.entities.HomeworkItem;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Admin on 18.06.2014.
@@ -18,7 +19,7 @@ public class HomeworkDao {
         hwItems.add(new HomeworkItem(1, "Aufgabe 1", "Mathematik"));
         hwItems.add(new HomeworkItem(2, "Lese Seite 2 - 3", "Deutsch"));
         hwItems.add(new HomeworkItem(3, "Springe umher!", "Turnen"));
-        hwItems.add(new HomeworkItem(4, "Baue Zeitmaschine", "Geschichte"));
+        hwItems.add(new HomeworkItem(4, "Baue Zeitmaschine", "Geschichte", new Date(2014, 3, 16), "picture", "IT WORKS!"));
         hwItems.add(new HomeworkItem(5, "Lade die Queen ein", "Englisch"));
         hwItems.add(new HomeworkItem(6, "Widerlege die Relativitätstheorie", "Physik"));
 

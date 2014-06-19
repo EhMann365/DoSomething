@@ -46,7 +46,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("id", Integer.toString(homeworkItems.get(position).getId()));
+        intent.putExtra("homeworkItem", homeworkItems.get(position));
         startActivity(intent);
     }
 }

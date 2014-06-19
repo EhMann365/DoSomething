@@ -1,13 +1,14 @@
 package ch.m335.controllers;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 import ch.m335.controllers.R;
+import ch.m335.entities.HomeworkItem;
+
+import java.util.Calendar;
 
 /**
  * Created by Joshua on 18.06.2014.
@@ -27,6 +28,10 @@ public class DetailActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
+
+        // Get the homework item sent as parameter
+        Intent intent = getIntent();
+        loadData((HomeworkItem) intent.getSerializableExtra("homeworkItem"));
 
         init();
     }
@@ -53,5 +58,17 @@ public class DetailActivity extends Activity {
             }
         };
         btnSave.setOnClickListener(oclSave);
+    }
+
+    private void loadData(HomeworkItem homeworkItem) {
+        int year = homeworkItem.getDueDate().getYear();
+        int month = homeworkItem.getDueDate().getMonth();
+        int day = homeworkItem.getDueDate().getDay();
+
+        ((EditText) findViewById(R.id.etTitle)).setText(homeworkItem.getTitle());
+        ((EditText) findViewById(R.id.etSubject)).setText(homeworkItem.getSubject());
+        ((DatePicker) findViewById(R.id.dpDueDate)).updateDate(year, month, day);
+        // TODO: Show picture
+        ((EditText) findViewById(R.id.etComment)).setText(homeworkItem.getComment());
     }
 }

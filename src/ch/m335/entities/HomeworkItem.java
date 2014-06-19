@@ -1,11 +1,12 @@
 package ch.m335.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Joshua on 18.06.2014.
  */
-public class HomeworkItem {
+public class HomeworkItem implements Serializable {
     //
     // Properties
     //
@@ -14,7 +15,7 @@ public class HomeworkItem {
     private String subject;
     private Date dueDate;
     // TODO: Find datatype for saving picture out
-    private Object picture;
+    private String picture;
     private String comment;
 
     //
@@ -26,11 +27,13 @@ public class HomeworkItem {
         this.title = title;
         this.subject = subject;
         this.dueDate = new Date();
-        this.picture = new Object();
+        this.picture = new String();
         this.comment = "";
     }
 
-    public HomeworkItem(String title, String subject, Date dueDate, Object picture, String comment) {
+    // TODO: Remove id from parameter list because it will be set automatically --> Just for testing
+    public HomeworkItem(int id, String title, String subject, Date dueDate, String picture, String comment) {
+        this.id = id;
         this.title = title;
         this.subject = subject;
         this.dueDate = dueDate;
@@ -75,10 +78,10 @@ public class HomeworkItem {
     }
 
 
-    public Object getPicture() {
+    public String getPicture() {
         return picture;
     }
-    public void setPicture(Object picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
