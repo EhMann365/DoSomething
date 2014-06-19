@@ -20,28 +20,24 @@ public class HomeworkItem {
     //
     // Constructors
     //
-    // TODO: Remove id from parameter list because it will be set automatically --> Just for testing
-    public HomeworkItem(int id, String title, String subject) {
+    public HomeworkItem(int id, String title, String subject, Date duedate, Object picture, String comment) {
         this.id = id;
         this.title = title;
         this.subject = subject;
-        this.dueDate = new Date();
-        this.picture = new Object();
-        this.comment = "";
-    }
-
-    public HomeworkItem(String title, String subject, Date dueDate, Object pichture, String comment) {
-        this.title = title;
-        this.subject = subject;
-        this.dueDate = dueDate;
-        this.picture = pichture;
+        this.dueDate = duedate;
+        this.picture = picture;
         this.comment = comment;
     }
 
-    @Override
-    public String toString() {
-        return title;
+    public HomeworkItem(String title, String subject, Date dueDate, Object picture, String comment) {
+        this.title = title;
+        this.subject = subject;
+        this.dueDate = dueDate;
+        this.picture = picture;
+        this.comment = comment;
     }
+
+    public HomeworkItem() {}
 
     //
     // Getter / Setter

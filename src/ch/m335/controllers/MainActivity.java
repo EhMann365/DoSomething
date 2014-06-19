@@ -3,6 +3,7 @@ package ch.m335.controllers;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +24,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private ArrayAdapter<HomeworkItem> homeworkItemArrayAdapter;
 
     public MainActivity() {
-        homeworkDao = new HomeworkDao();
+
     }
 
     @Override
@@ -31,6 +32,30 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
 
+        homeworkDao = new HomeworkDao(this.getApplicationContext());
+        Log.d("DoSomething: ", "HomeworkDao created");
+        homeworkDao.getWritableDatabase();
+
+        /*homeworkDao.insertHomework(new HomeworkItem("Test 1", "Neu", Date.valueOf("2014-06-19"), new String(),"A Comment 1"));
+        Log.d("DoSomething: ", "Data 1 inserted");
+        homeworkDao.insertHomework(new HomeworkItem("Test 2", "Neu", Date.valueOf("2014-06-18"), new String(), "A Comment 2"));
+        Log.d("DoSomething: ", "Data 2 inserted");*/
+        /*homeworkDao.insertHomework(new HomeworkItem("Test 3", "Neu", Date.valueOf("2014-06-17"), new String(), "A Comment 3"));
+        Log.d("DoSomething: ", "Data 3 inserted");*/
+
+        /*homeworkDao.updateHomework(new HomeworkItem(3, "Test 3 Test", "Neu Updatet", Date.valueOf("2014-06-18"), new String(), "A Comment 3"));
+        homeworkDao.deleteHomework(new HomeworkItem(1, "Test 3 Test", "Neu Updatet", Date.valueOf("2014-06-18"), new String(), "A Comment 3"));
+
+        List<HomeworkItem> list = homeworkDao.selectAllHomeworks();
+        Log.d("DoSomething: ", "List created");
+
+        for (HomeworkItem hwi : list) {
+            Log.d("DoSomething: ",hwi.getId() + ";" + hwi.getTitle() + ";" + hwi.getSubject() + ";" + hwi.getDueDate().toString() + ";" + hwi.getPicture() + ";" + hwi.getComment());
+        }
+
+        HomeworkItem hwi = homeworkDao.selectHomework(4);
+        Log.d("DoSomething: ",hwi.getId() + ";" + hwi.getTitle() + ";" + hwi.getSubject() + ";" + hwi.getDueDate().toString() + ";" + hwi.getPicture() + ";" + hwi.getComment());
+*/
         Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
         setContentView(R.layout.main);
@@ -40,7 +65,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void loadList() {
-        homeworkItems = homeworkDao.getHomeworkItems();
+        homeworkItems = (ArrayList<HomeworkItem>) homeworkDao.selectAllHomeworks();
         homeworkItemArrayAdapter = new ArrayAdapter<HomeworkItem>(this, android.R.layout.simple_list_item_1, homeworkItems);
         ((ListView)findViewById(R.id.lvHomeworkItems)).setAdapter(homeworkItemArrayAdapter);
     }

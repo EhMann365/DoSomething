@@ -8,6 +8,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import ch.m335.controllers.R;
+import ch.m335.dao.HomeworkDao;
+import ch.m335.entities.HomeworkItem;
+
+import java.util.Date;
 
 /**
  * Created by Joshua on 18.06.2014.
@@ -22,6 +26,8 @@ public class DetailActivity extends Activity {
     private Button btnSave;
     private View.OnClickListener oclPicture;
     private View.OnClickListener oclSave;
+
+    private HomeworkItem hwi;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +55,13 @@ public class DetailActivity extends Activity {
 
         oclPicture = new View.OnClickListener() {
             public void onClick(View v) {
-
+                createHomeworkItem();
             }
         };
         btnSave.setOnClickListener(oclSave);
+    }
+
+    private void createHomeworkItem() {
+        hwi = new HomeworkItem(etTitle.getText().toString(), etSubject.getText().toString(), new Date(etDueDate.getYear(), etDueDate.getMonth(), etDueDate.getDayOfMonth()), etPicture.getText(), etComment.getText().toString());
     }
 }
