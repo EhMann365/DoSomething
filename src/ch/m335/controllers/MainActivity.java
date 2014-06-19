@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import ch.m335.classes.HomeworkItemArrayAdapter;
 import ch.m335.dao.HomeworkDao;
 import ch.m335.entities.HomeworkItem;
 
@@ -21,16 +22,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private HomeworkDao homeworkDao;
     private ArrayList<HomeworkItem> homeworkItems;
-    private ArrayAdapter<HomeworkItem> homeworkItemArrayAdapter;
+    private HomeworkItemArrayAdapter<HomeworkItem> homeworkItemArrayAdapter;
 
     public MainActivity() {
-
+        homeworkDao = new HomeworkDao();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail);
+        setContentView(R.layout.main);
 
         homeworkDao = new HomeworkDao(this.getApplicationContext());
         Log.d("DoSomething: ", "HomeworkDao created");
@@ -56,21 +57,23 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         HomeworkItem hwi = homeworkDao.selectHomework(4);
         Log.d("DoSomething: ",hwi.getId() + ";" + hwi.getTitle() + ";" + hwi.getSubject() + ";" + hwi.getDueDate().toString() + ";" + hwi.getPicture() + ";" + hwi.getComment());
 */
-        Intent intent = new Intent(this, DetailActivity.class);
-        startActivity(intent);
-        setContentView(R.layout.main);
 
+        // Load items into the listview
         loadList();
+
+        // Set listener for navigating to the detail view after clicking an item
         ((ListView) findViewById(R.id.lvHomeworkItems)).setOnItemClickListener(this);
     }
 
     private void loadList() {
-        homeworkItems = (ArrayList<HomeworkItem>) homeworkDao.selectAllHomeworks();
-        homeworkItemArrayAdapter = new ArrayAdapter<HomeworkItem>(this, android.R.layout.simple_list_item_1, homeworkItems);
+        homeworkItems = homeworkDao.getHomeworkItems();
+        homeworkItemArrayAdapter = new HomeworkItemArrayAdapter<>(this, homeworkItems);
         ((ListView)findViewById(R.id.lvHomeworkItems)).setAdapter(homeworkItemArrayAdapter);
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, homeworkItems.get(position).toString(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("homeworkItem", homeworkItems.get(position));
+        startActivity(intent);
     }
 }
