@@ -34,7 +34,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
 
         homeworkDao = new HomeworkDao(this.getApplicationContext());
-        Log.d("DoSomething: ", "HomeworkDao created");
         homeworkDao.getWritableDatabase();
 
         // Load items into the listview
