@@ -51,13 +51,13 @@ public class DetailActivity extends Activity {
         findViewById(R.id.tvPictureLink).setOnClickListener(new OnPictureLinkClickListener());
         findViewById(R.id.btnSave).setOnClickListener(new OnSaveButtonClickListener());
         findViewById(R.id.btnDelete).setOnClickListener(new OnDeleteButtonClickListener());
-
         shakeListener = new ShakeListener(this);
         shakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
             @Override
             public void onShake() {
                 HomeworkDao dao = new HomeworkDao(DetailActivity.this);
                 dao.deleteHomework(homeworkItem);
+                finish();
             }
         });
     }
@@ -85,10 +85,13 @@ public class DetailActivity extends Activity {
         int month = calender.get(Calendar.MONTH);
         int day = calender.get(Calendar.DAY_OF_MONTH);
 
+        // Set correct, full filepath
+        fileUri = Uri.parse(this.homeworkItem.getPicture());
+
         ((EditText) findViewById(R.id.etTitle)).setText(this.homeworkItem.getTitle());
         ((EditText) findViewById(R.id.etSubject)).setText(this.homeworkItem.getSubject());
         ((DatePicker) findViewById(R.id.dpDueDate)).updateDate(year, month, day);
-        ((TextView) findViewById(R.id.tvPictureLink)).setText(this.homeworkItem.getPicture());
+        ((TextView) findViewById(R.id.tvPictureLink)).setText(fileUri.getLastPathSegment());
         ((EditText) findViewById(R.id.etComment)).setText(this.homeworkItem.getComment());
 
         if (this.homeworkItem.getId() == 0) {
@@ -153,7 +156,7 @@ public class DetailActivity extends Activity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            homeworkItem.setPicture(((TextView) findViewById(R.id.tvPictureLink)).getText().toString());
+            homeworkItem.setPicture(fileUri.toString());
             homeworkItem.setComment(((EditText) findViewById(R.id.etComment)).getText().toString());
 
             if (homeworkItem.getId() == 0) {
