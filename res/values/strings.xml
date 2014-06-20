@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DoSomething</string>
+	<string name="add_homework">Add new homework</string>
+	<string name="title">Title</string>
+	<string name="subject">Subject</string>
+	<string name="due_date">Due date</string>
+	<string name="picture">Picture</string>
+	<string name="add_picture">Add picture</string>
+	<string name="comment">Comment</string>
+	<string name="save">Save</string>
+	<string name="delete">Delete</string>
 </resources>
