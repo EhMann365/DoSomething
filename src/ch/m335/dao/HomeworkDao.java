@@ -68,7 +68,7 @@ public class HomeworkDao extends SQLiteOpenHelper {
 
     public void deleteHomework(HomeworkItem homeworkItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("homework", "id=?", new String[] {String.valueOf(homeworkItem)});
+        db.delete("homework", "id=?", new String[] {String.valueOf(homeworkItem.getId())});
         db.close();
     }
 

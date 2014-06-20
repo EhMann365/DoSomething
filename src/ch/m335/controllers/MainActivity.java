@@ -13,6 +13,7 @@ import ch.m335.classes.HomeworkItemArrayAdapter;
 import ch.m335.dao.HomeworkDao;
 import ch.m335.entities.HomeworkItem;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -37,32 +38,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         Log.d("DoSomething: ", "HomeworkDao created");
         homeworkDao.getWritableDatabase();
 
-        /*homeworkDao.insertHomework(new HomeworkItem("Test 1", "Neu", Date.valueOf("2014-06-19"), new String(),"A Comment 1"));
-        Log.d("DoSomething: ", "Data 1 inserted");
-        homeworkDao.insertHomework(new HomeworkItem("Test 2", "Neu", Date.valueOf("2014-06-18"), new String(), "A Comment 2"));
-        Log.d("DoSomething: ", "Data 2 inserted");*/
-        /*homeworkDao.insertHomework(new HomeworkItem("Test 3", "Neu", Date.valueOf("2014-06-17"), new String(), "A Comment 3"));
-        Log.d("DoSomething: ", "Data 3 inserted");*/
-
-        /*homeworkDao.updateHomework(new HomeworkItem(3, "Test 3 Test", "Neu Updatet", Date.valueOf("2014-06-18"), new String(), "A Comment 3"));
-        homeworkDao.deleteHomework(new HomeworkItem(1, "Test 3 Test", "Neu Updatet", Date.valueOf("2014-06-18"), new String(), "A Comment 3"));
-
-        List<HomeworkItem> list = homeworkDao.selectAllHomeworks();
-        Log.d("DoSomething: ", "List created");
-
-        for (HomeworkItem hwi : list) {
-            Log.d("DoSomething: ",hwi.getId() + ";" + hwi.getTitle() + ";" + hwi.getSubject() + ";" + hwi.getDueDate().toString() + ";" + hwi.getPicture() + ";" + hwi.getComment());
-        }
-
-        HomeworkItem hwi = homeworkDao.selectHomework(4);
-        Log.d("DoSomething: ",hwi.getId() + ";" + hwi.getTitle() + ";" + hwi.getSubject() + ";" + hwi.getDueDate().toString() + ";" + hwi.getPicture() + ";" + hwi.getComment());
-*/
-
         // Load items into the listview
         loadList();
 
         // Set listener for navigating to the detail view after clicking an item
         ((ListView) findViewById(R.id.lvHomeworkItems)).setOnItemClickListener(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        loadList();
     }
 
     private void loadList() {
@@ -74,6 +61,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("homeworkItem", homeworkItems.get(position));
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 }

@@ -12,9 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import ch.m335.controllers.R;
+import ch.m335.dao.HomeworkDao;
 import ch.m335.entities.HomeworkItem;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +27,7 @@ import java.util.Date;
 public class DetailActivity extends Activity {
 
     protected HomeworkItem homeworkItem;
+    protected HomeworkDao homeworkDao;
     // TODO: Search for use of these static final property --> Always 100?
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
@@ -34,6 +37,9 @@ public class DetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
 
+        homeworkDao = new HomeworkDao(this.getApplicationContext());
+        homeworkDao.getWritableDatabase();
+
         // Get the homework item sent as parameter
         Intent intent = getIntent();
         loadData((HomeworkItem) intent.getSerializableExtra("homeworkItem"));
@@ -41,6 +47,9 @@ public class DetailActivity extends Activity {
         // Set the listeners
         findViewById(R.id.btnPicture).setOnClickListener(new OnPictureButtonClickListener());
         findViewById(R.id.tvPictureLink).setOnClickListener(new OnPictureLinkClickListener());
+        findViewById(R.id.btnSave).setOnClickListener(new OnSaveButtonClickListener());
+        findViewById(R.id.btnDelete).setOnClickListener(new OnDeleteButtonClickListener());
+
     }
 
     private void loadData(HomeworkItem homeworkItem) {
@@ -56,6 +65,10 @@ public class DetailActivity extends Activity {
         ((DatePicker) findViewById(R.id.dpDueDate)).updateDate(year, month, day);
         ((TextView) findViewById(R.id.tvPictureLink)).setText(this.homeworkItem.getPicture());
         ((EditText) findViewById(R.id.etComment)).setText(this.homeworkItem.getComment());
+
+        if (this.homeworkItem.getId() == 0) {
+            findViewById(R.id.btnDelete).setActivated(false);
+        }
     }
 
     @Override
@@ -99,6 +112,50 @@ public class DetailActivity extends Activity {
         }
 
         return null;
+    }
+
+    public class OnSaveButtonClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            homeworkItem.setTitle(((EditText) findViewById(R.id.etTitle)).getText().toString());
+            homeworkItem.setSubject(((EditText) findViewById(R.id.etSubject)).getText().toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                DatePicker dp = (DatePicker) findViewById(R.id.dpDueDate);
+                String dateString = dp.getYear() + "-" + dp.getMonth() + "-" + dp.getDayOfMonth();
+                java.util.Date date = sdf.parse(dateString);
+                homeworkItem.setDueDate(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            homeworkItem.setPicture(((TextView) findViewById(R.id.tvPictureLink)).getText().toString());
+            homeworkItem.setComment(((EditText) findViewById(R.id.etComment)).getText().toString());
+
+            if (homeworkItem.getId() == 0) {
+                homeworkDao.insertHomework(homeworkItem);
+            } else {
+                homeworkDao.updateHomework(homeworkItem);
+            }
+            finish();
+        }
+    }
+
+    public class OnDeleteButtonClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            homeworkItem.setTitle(((EditText) findViewById(R.id.etTitle)).getText().toString());
+            homeworkItem.setSubject(((EditText) findViewById(R.id.etSubject)).getText().toString());
+            DatePicker dp = (DatePicker) findViewById(R.id.dpDueDate);
+            String dateString = dp.getYear() + "-" + dp.getMonth() + "-" + dp.getDayOfMonth();
+            homeworkItem.setDueDate(java.sql.Date.valueOf(dateString));
+            homeworkItem.setPicture(((TextView) findViewById(R.id.tvPictureLink)).getText().toString());
+            homeworkItem.setComment(((EditText) findViewById(R.id.etComment)).getText().toString());
+
+            homeworkDao.deleteHomework(homeworkItem);
+            finish();
+        }
     }
 
     public class OnPictureButtonClickListener implements View.OnClickListener {
