@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
             case R.id.itNewHomeworkItem:
                 Intent intent = new Intent(this, DetailActivity.class);
                 intent.putExtra("homeworkItem", new HomeworkItem());
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 return true;
         }
 
