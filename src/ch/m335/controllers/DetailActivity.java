@@ -13,13 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import ch.m335.classes.ShakeListener;
-import android.widget.*;
-import ch.m335.controllers.R;
 import ch.m335.dao.HomeworkDao;
 import ch.m335.entities.HomeworkItem;
 
 import java.io.File;
-import java.text.ParseException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -59,7 +56,8 @@ public class DetailActivity extends Activity {
         shakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
             @Override
             public void onShake() {
-                // TODO: Delete current homework item
+                HomeworkDao dao = new HomeworkDao(DetailActivity.this);
+                dao.deleteHomework(homeworkItem);
             }
         });
     }
