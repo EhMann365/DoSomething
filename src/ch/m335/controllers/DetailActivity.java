@@ -201,7 +201,7 @@ public class DetailActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            if (((TextView)findViewById(v.getId())).getText() == null) {
+            if (((TextView)findViewById(v.getId())).getText().length() > 0) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.parse(fileUri.toString()), "image/*");
