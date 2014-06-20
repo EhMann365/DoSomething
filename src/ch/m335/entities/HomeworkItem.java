@@ -13,14 +13,24 @@ public class HomeworkItem implements Serializable {
     private int id;
     private String title;
     private String subject;
-    private Date dueDate;
-    // TODO: Find datatype for saving picture out
-    private String picture;
+    private Date dueDate;   // Date until the homework has to be made
+    private String picture; // The file uri to the picture in the storage (SDCard)
     private String comment;
 
     //
     // Constructors
     //
+    public HomeworkItem() { }
+
+    /**
+     * Constructor is used when items were are read from database
+     * @param id
+     * @param title
+     * @param subject
+     * @param duedate
+     * @param picture
+     * @param comment
+     */
     public HomeworkItem(int id, String title, String subject, Date duedate, String picture, String comment) {
         this.id = id;
         this.title = title;
@@ -30,19 +40,20 @@ public class HomeworkItem implements Serializable {
         this.comment = comment;
     }
 
+    /**
+     * Constructor is used when a new homework item is created from the GUI
+     * @param title
+     * @param subject
+     * @param dueDate
+     * @param picture
+     * @param comment
+     */
     public HomeworkItem(String title, String subject, Date dueDate, String picture, String comment) {
         this.title = title;
         this.subject = subject;
         this.dueDate = dueDate;
         this.picture = picture;
         this.comment = comment;
-    }
-
-    public HomeworkItem() {}
-
-    @Override
-    public String toString() {
-        return title;
     }
 
     //
@@ -75,7 +86,6 @@ public class HomeworkItem implements Serializable {
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
-
 
     public String getPicture() {
         return picture;
