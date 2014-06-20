@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import ch.m335.classes.ShakeListener;
 import ch.m335.entities.HomeworkItem;
 
 import java.io.File;
@@ -28,6 +29,7 @@ public class DetailActivity extends Activity {
     // TODO: Search for use of these static final property --> Always 100?
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
+    private ShakeListener shakeListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,25 @@ public class DetailActivity extends Activity {
         // Set the listeners
         findViewById(R.id.btnPicture).setOnClickListener(new OnPictureButtonClickListener());
         findViewById(R.id.tvPictureLink).setOnClickListener(new OnPictureLinkClickListener());
+        shakeListener = new ShakeListener(this);
+        shakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
+            @Override
+            public void onShake() {
+                // TODO: Delete current homework item
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        shakeListener.resume();
+        super.onResume();
+    }
+
+    @Override
+    public  void onPause() {
+        shakeListener.pause();
+        super.onPause();
     }
 
     private void loadData(HomeworkItem homeworkItem) {
