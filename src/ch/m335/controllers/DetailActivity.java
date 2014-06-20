@@ -1,8 +1,6 @@
 package ch.m335.controllers;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +14,7 @@ import ch.m335.dao.HomeworkDao;
 import ch.m335.entities.HomeworkItem;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,10 +54,13 @@ public class DetailActivity extends Activity {
     private void loadData(HomeworkItem homeworkItem) {
         this.homeworkItem = homeworkItem;
 
-        // TODO: Change from deprecated 'Date' to 'Calendar'
-        int year = this.homeworkItem.getDueDate().getYear();
-        int month = this.homeworkItem.getDueDate().getMonth();
-        int day = this.homeworkItem.getDueDate().getDay();
+        // Use Calender instead of the methods of Date
+        // because those are deprecated
+        Calendar calender = Calendar.getInstance();
+        calender.setTime(this.homeworkItem.getDueDate());
+        int year = calender.get(Calendar.YEAR);
+        int month = calender.get(Calendar.MONTH);
+        int day = calender.get(Calendar.DAY_OF_MONTH);
 
         ((EditText) findViewById(R.id.etTitle)).setText(this.homeworkItem.getTitle());
         ((EditText) findViewById(R.id.etSubject)).setText(this.homeworkItem.getSubject());
@@ -104,11 +106,10 @@ public class DetailActivity extends Activity {
                 }
             }
 
-            // Create the picture file with the prefix 'IMG' concatenated with the current timestamp
+            // Create the picture file with the prefix 'IMG' concatenated with the current timestamp and
+            // return it
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-            File mediaFile = new File(storageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
-
-            return mediaFile;
+            return new File(storageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
         }
 
         return null;

@@ -72,6 +72,7 @@ public class HomeworkDao extends SQLiteOpenHelper {
         db.close();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public HomeworkItem selectHomework(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("homework", new String[] {"id", "title", "subject", "duedate", "picture", "comment"}, "id=?", new String[] {String.valueOf(id)}, null, null, null, null);
@@ -83,6 +84,7 @@ public class HomeworkDao extends SQLiteOpenHelper {
         HomeworkItem hwi;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
+            // TODO: Inform user when exception was thrown
             java.util.Date date = sdf.parse(cursor.getString(3));
             hwi = new HomeworkItem(cursor.getInt(0), cursor.getString(1), cursor.getString(2), date, cursor.getString(4), cursor.getString(5));
             db.close();
