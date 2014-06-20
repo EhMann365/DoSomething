@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="fill_parent"
         android:weightSum="1">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Title"
+            android:text="@string/title"
             android:id="@+id/tvTitle"/>
     <EditText
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Subject"
+            android:text="@string/subject"
             android:id="@+id/tvSubject"/>
     <EditText
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Due Date"
+            android:text="@string/due_date"
             android:id="@+id/tvDueDate"/>
     <DatePicker
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Picture"
+            android:text="@string/picture"
             android:id="@+id/tvPicture"/>
     <LinearLayout
             android:orientation="horizontal"
@@ -54,14 +54,14 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Picture"
+                android:text="@string/add_picture"
                 android:id="@+id/btnPicture"/>
     </LinearLayout>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Comment"
+            android:text="@string/comment"
             android:id="@+id/tvComment"/>
     <EditText
             android:layout_width="match_parent"
@@ -76,12 +76,12 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="@string/save"
                 android:id="@+id/btnSave" android:layout_weight="0.06"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:id="@+id/btnDelete" android:layout_weight="0.06"/>
     </LinearLayout>
 </LinearLayout>

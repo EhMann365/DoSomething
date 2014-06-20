@@ -3,5 +3,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 			android:id="@+id/itNewHomeworkItem"
-			android:title="Neu" />
+			android:title="@string/add_homework" />
 </menu>
