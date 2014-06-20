@@ -198,10 +198,12 @@ public class DetailActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse(fileUri.toString()), "image/*");
-            startActivity(intent);
+            if (((TextView)findViewById(v.getId())).getText() == null) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(fileUri.toString()), "image/*");
+                startActivity(intent);
+            }
         }
     }
 }
