@@ -20,7 +20,14 @@ public class HomeworkItem implements Serializable {
     //
     // Constructors
     //
-    public HomeworkItem() { }
+    public HomeworkItem() {
+        this.id = 0;
+        this.title = "";
+        this.subject = "";
+        this.dueDate = new Date();
+        this.picture = "";
+        this.comment = "";
+    }
 
     /**
      * Constructor is used when items were are read from database
