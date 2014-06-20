@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ch.m335.controllers.R;
-import ch.m335.entities.HomeworkItem;
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Brian on 19.06.2014.
