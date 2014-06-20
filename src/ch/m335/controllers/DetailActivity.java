@@ -94,7 +94,7 @@ public class DetailActivity extends Activity {
         ((EditText) findViewById(R.id.etComment)).setText(this.homeworkItem.getComment());
 
         if (this.homeworkItem.getId() == 0) {
-            findViewById(R.id.btnDelete).setActivated(false);
+            findViewById(R.id.btnDelete).setEnabled(false);
         }
     }
 
